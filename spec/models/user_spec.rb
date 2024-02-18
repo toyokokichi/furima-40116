@@ -1,12 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   before do
-  @user = FactoryBot.build(:user)
+    @user = FactoryBot.build(:user)
   end
-
-
 
   describe 'ユーザー新規登録' do
     it 'nicknameとemail、passwordとpassword_confirmation、last_name、first_name、katakana_last_name、katakana_first_name、birthdateが存在すれば登録できる' do
@@ -80,7 +77,7 @@ RSpec.describe User, type: :model do
       @user.password = Faker::Internet.password(min_length: 129, max_length: 150)
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
+      expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
     end
     it 'passwordが半角英語のみでは登録できない' do
       @user.password = 'aaaaaa'
@@ -96,4 +93,3 @@ RSpec.describe User, type: :model do
     end
   end
 end
-
