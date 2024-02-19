@@ -29,20 +29,40 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name can't be blank")
     end
+    it 'last_nameに半角文字が含まれていると登録できない' do
+      @user.last_name = 'gaga'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Last name is invalid')
+    end
     it 'first_nameが空では登録できない' do
       @user.first_name = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("First name can't be blank")
+    end
+    it 'first_nameに半角文字が含まれていると登録できない' do
+      @user.first_name = 'gaga'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('First name is invalid')
     end
     it 'katakana_last_nameが空では登録できない' do
       @user.katakana_last_name = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Katakana last name can't be blank")
     end
+    it 'katakana_last_nameにカタカナ以外の文字が含まれていると登録できない' do
+      @user.katakana_last_name = 'gaga@'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Katakana last name is invalid')
+    end
     it 'katakana_first_nameが空では登録できない' do
       @user.katakana_first_name = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Katakana first name can't be blank")
+    end
+    it 'katakana_first_nameにカタカナ以外の文字が含まれていると登録できない' do
+      @user.katakana_first_name = 'がが'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Katakana first name is invalid')
     end
     it 'birthdateが空では登録できない' do
       @user.birthdate = ''
@@ -82,6 +102,12 @@ RSpec.describe User, type: :model do
     it 'passwordが半角英語のみでは登録できない' do
       @user.password = 'aaaaaa'
       @user.password_confirmation = 'aaaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid')
+    end
+    it 'passwordに全角文字を含むと登録できない' do
+      @user.password = 'Ａaaaa1'
+      @user.password_confirmation = 'Ａaaaa1'
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is invalid')
     end
