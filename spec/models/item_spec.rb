@@ -26,7 +26,7 @@ RSpec.describe Item, type: :model do
       it 'item_nameが41文字以上の時は登録できない' do
         @item.item_name = Faker::Name.initials(number: 41)
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item name is too long (maximum is 40 characters)")
+        expect(@item.errors.full_messages).to include('Item name is too long (maximum is 40 characters)')
       end
       it 'descriptionが空では登録できない' do
         @item.description = ''
@@ -36,7 +36,7 @@ RSpec.describe Item, type: :model do
       it 'descriptionが1001文字以上の時は登録できない' do
         @item.description = Faker::Name.initials(number: 1001)
         @item.valid?
-        expect(@item.errors.full_messages).to include("Description is too long (maximum is 1000 characters)")
+        expect(@item.errors.full_messages).to include('Description is too long (maximum is 1000 characters)')
       end
       it 'category_idが空では登録できない' do
         @item.category_id = ''
@@ -71,17 +71,17 @@ RSpec.describe Item, type: :model do
       it 'priceが300未満では登録できない' do
         @item.price = Faker::Number.between(from: 1, to: 299)
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceが9999999より高い場合では登録できない' do
-        @item.price = Faker::Number.between(from: 10000000, to: 99999999)
+        @item.price = Faker::Number.between(from: 10_000_000, to: 99_999_999)
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'priceが半角数字でない場合は登録できない' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'userが紐付いていないと保存できない' do
         @item.user = nil
