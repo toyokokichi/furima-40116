@@ -7,5 +7,5 @@ priceInput.addEventListener("input", () =>{
   const inputValue = priceInput.value;
   addTaxDom.innerHTML = Math.floor(inputValue*0.1);
   const addTaxValue = addTaxDom.innerHTML
-  profit.innerHTML = inputValue - addTaxValue ;
+  profit.innerHTML = Math.floor(inputValue - addTaxValue) ;
 })
