@@ -23,9 +23,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.user != current_user
-      redirect_to root_path
-    end
+    return unless @item.user != current_user || @item.order.present?
+
+    redirect_to root_path
   end
 
   def update
@@ -37,9 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.user == current_user
-      @item.destroy
-    end
+    @item.destroy if @item.user == current_user
     redirect_to root_path
   end
 
