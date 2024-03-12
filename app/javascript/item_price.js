@@ -10,5 +10,7 @@ const calc = () => {
     const addTaxValue = addTaxDom.innerHTML
     profit.innerHTML = Math.floor(inputValue - addTaxValue) ;
   })
+
 };
 window.addEventListener("turbo:load", calc);
+window.addEventListener("turbo:render", calc);

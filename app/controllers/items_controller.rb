@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
+
     end
   end
 
@@ -33,6 +34,7 @@ class ItemsController < ApplicationController
       redirect_to item_path
     else
       render :edit, status: :unprocessable_entity
+
     end
   end
 
